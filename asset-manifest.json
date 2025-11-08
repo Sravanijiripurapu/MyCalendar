@@ -1,0 +1,12 @@
+{
+  "files": {
+    "main.js": "/MyCalendar/static/js/main.1a276fa2.js",
+    "static/js/453.eb638a06.chunk.js": "/MyCalendar/static/js/453.eb638a06.chunk.js",
+    "index.html": "/MyCalendar/index.html",
+    "main.1a276fa2.js.map": "/MyCalendar/static/js/main.1a276fa2.js.map",
+    "453.eb638a06.chunk.js.map": "/MyCalendar/static/js/453.eb638a06.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.1a276fa2.js"
+  ]
+}
