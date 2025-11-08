@@ -70,7 +70,13 @@ export default function Calendar() {
   const jumpToToday = () => setCurrentMonth(dayjs().startOf("month"));
 
   const openDateModal = (date) => { setActiveDate(date); setModalVisible(true); };
-  const addEvent = (newEvent) => setEventList(prev => [...prev, { id: Math.random().toString(36).slice(2,9), ...newEvent }]);
+
+  // Add event to selected date or today by default
+  const addEvent = (newEvent) => {
+    const date = activeDate ? dayjs(activeDate).format("YYYY-MM-DD") : dayjs().format("YYYY-MM-DD");
+    setEventList(prev => [...prev, { id: Math.random().toString(36).slice(2,9), date, ...newEvent }]);
+  };
+
   const removeEvent = (id) => setEventList(prev => prev.filter(e => e.id !== id));
 
   const layoutStyle = {

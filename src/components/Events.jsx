@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+import dayjs from "dayjs";
 import NewEventForm from "./NewEventForm";
 
 export default function Events({ activeDate, eventsByDate, removeEvent, addEvent, setModalVisible, palette }) {
@@ -15,21 +16,30 @@ export default function Events({ activeDate, eventsByDate, removeEvent, addEvent
         background: palette.card, padding: 24, borderRadius: 8, width: 400,
         maxHeight: "80vh", overflowY: "auto"
       }}>
-        <h3 style={{ marginBottom: 12 }}>Events on {activeDate}</h3>
+        <h3 style={{ marginBottom: 12 }}>Events on {activeDate || dayjs().format("YYYY-MM-DD")}</h3>
 
-        {events.length > 0 ? events.map(ev => (
-          <div key={ev.id} style={{
-            background: palette.event[ev.color]?.bg,
-            color: palette.event[ev.color]?.text,
-            padding: 8,
-            borderRadius: 6,
-            marginBottom: 6,
-            display: "flex", justifyContent: "space-between"
-          }}>
-            <span>{ev.title}</span>
-            <button onClick={() => removeEvent(ev.id)}>🗑</button>
-          </div>
-        )) : <p>No events yet.</p>}
+       {events.length > 0 ? events.map(ev => (
+  <div key={ev.id} style={{
+    background: palette.event[ev.color]?.bg,
+    color: palette.event[ev.color]?.text,
+    padding: 6,
+    borderRadius: 6,
+    marginBottom: 6,
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center"
+  }}>
+    <div style={{ display: "flex", flexDirection: "column" }}>
+      {ev.start && ev.end && (
+        <span style={{ fontSize: 12, opacity: 0.8 }}>{ev.start} - {ev.end}</span>
+      )}
+      <span>{ev.title}</span>
+    </div>
+    <button onClick={() => removeEvent(ev.id)} 
+      style={{ fontSize: 12, padding: "2px 4px", marginLeft: 8 }}>🗑</button>
+  </div>
+)) : <p>No events yet.</p>}
+
 
         <NewEventForm addEvent={addEvent} activeDate={activeDate} />
         <button onClick={() => setModalVisible(false)} style={{ marginTop: 10 }}>Close</button>
